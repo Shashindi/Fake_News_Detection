@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fake News Detection Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>
+        <span class="highlight fake-word">Fake</span> News
+        <span class="highlight real-word">Detection</span>
+      </h1>
+      <div class="header-line"></div>
+    </header>
+
+    <div class="result-card">
+      <h2>Prediction Result</h2>
+
+      <p><strong>Entered News Text:</strong></p>
+      <div class="news-text">{{ text }}</div>
+
+      <p><strong>Prediction:</strong></p>
+      <div class="result-box {{ 'fake' if prediction == 'FAKE' else 'real' }}">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          {% if prediction == 'FAKE' %}
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          {% else %}
+            <polyline points="20 6 9 17 4 12"></polyline>
+          {% endif %}
+        </svg>
+        <span class="result-text">{{ prediction }}</span>
+      </div>
+
+      <a href="{{ url_for('home') }}" class="btn">Check Another News</a>
+    </div>
+  </div>
+</body>
+</html>
